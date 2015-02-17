@@ -55,6 +55,7 @@
     </ApplicationDefinition>
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Model\ServiceManager.cs" />
+    <Compile Include="ViewModel\CommandFactory.cs" />
     <Compile Include="ViewModel\ServiceViewModel.cs" />
     <Compile Include="View\Info.xaml.cs">
       <DependentUpon>Info.xaml</DependentUpon>
