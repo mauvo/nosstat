@@ -3,13 +3,16 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:nosstat="clr-namespace:NosStat.WindowsClient.Gui"
+        xmlns:viewmodel="clr-namespace:NosStat.WindowsClient.Gui.ViewModel"
         xmlns:view="clr-namespace:NosStat.WindowsClient.Gui.View"
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
+    <Window.DataContext>
+        <viewmodel:ServiceViewModel/>
+    </Window.DataContext>
     <StackPanel>
-        <view:ServiceStatus/>
-        <view:ServiceControls/>
+        <view:ServiceStatus DataContext="{Binding .}"/>
+        <view:ServiceControls DataContext="{Binding .}"/>
         <view:Info/>
     </StackPanel>
 </Window>
