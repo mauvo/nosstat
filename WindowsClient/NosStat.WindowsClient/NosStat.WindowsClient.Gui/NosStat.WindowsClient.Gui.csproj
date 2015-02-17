@@ -53,16 +53,16 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Info.xaml.cs">
+    <Compile Include="View\Info.xaml.cs">
       <DependentUpon>Info.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ServiceControls.xaml.cs">
+    <Compile Include="View\ServiceControls.xaml.cs">
       <DependentUpon>ServiceControls.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ServiceStatus.xaml.cs">
+    <Compile Include="View\ServiceStatus.xaml.cs">
       <DependentUpon>ServiceStatus.xaml</DependentUpon>
     </Compile>
-    <Page Include="Info.xaml">
+    <Page Include="View\Info.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -78,11 +78,11 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="ServiceControls.xaml">
+    <Page Include="View\ServiceControls.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="ServiceStatus.xaml">
+    <Page Include="View\ServiceStatus.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

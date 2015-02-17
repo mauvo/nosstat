@@ -1,4 +1,4 @@
-namespace NosStat.WindowsClient.Gui
+namespace NosStat.WindowsClient.Gui.View
 {
     public partial class ServiceControls
     {
