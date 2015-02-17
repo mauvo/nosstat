@@ -1,4 +1,5 @@
 using System;
+using System.ServiceProcess;
 using System.Threading.Tasks;
 
 namespace NosStat.WindowsClient.Gui.Model
@@ -6,6 +7,13 @@ namespace NosStat.WindowsClient.Gui.Model
     public class ServiceManager
     {
         public bool IsInstalled { get; private set; } = false;
+
+        private Service service;
+
+        public ServiceManager()
+        {
+            service = new Service();
+        }
 
         public void InstallService(Action onServiceInstallCompleteCallback, Action<Exception> onServiceInstallFailedCallback)
         {
