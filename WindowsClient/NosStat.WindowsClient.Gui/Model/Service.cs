@@ -1,4 +1,5 @@
-﻿using System.ServiceProcess;
+﻿using System.Linq;
+using System.ServiceProcess;
 
 namespace NosStat.WindowsClient.Gui.Model
 {
@@ -7,10 +8,12 @@ namespace NosStat.WindowsClient.Gui.Model
         private const string NosStateServiceName = "";
 
         private ServiceController serviceController;
+
+        public bool IsInstalled { get { return serviceController != null; } }
         
         public Service()
         {
-            serviceController = new ServiceController(NosStateServiceName);
+            serviceController = ServiceController.GetServices().FirstOrDefault(s => s.ServiceName == NosStateServiceName);
         }
     }
 }
