@@ -14,5 +14,6 @@
         <view:ServiceStatus DataContext="{Binding .}"/>
         <view:ServiceControls DataContext="{Binding .}"/>
         <view:Info/>
+        <view:ErrorDisplay DataContext="{Binding .}"/>
     </StackPanel>
 </Window>

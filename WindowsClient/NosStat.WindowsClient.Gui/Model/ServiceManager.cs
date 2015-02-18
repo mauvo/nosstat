@@ -6,7 +6,7 @@ namespace NosStat.WindowsClient.Gui.Model
 {
     public class ServiceManager
     {
-        public bool IsInstalled { get; private set; } = false;
+        public bool IsInstalled { get { return service.IsInstalled; } }
 
         private Service service;
 
@@ -25,8 +25,7 @@ namespace NosStat.WindowsClient.Gui.Model
         {
             return Task.Factory.StartNew(() =>
             {
-                System.Threading.Thread.Sleep(1000);
-                IsInstalled = true;
+                service.Install();
             });
         }
 

@@ -37,6 +37,7 @@ namespace NosStat.WindowsClient.Gui.ViewModel
 
         private void OnServiceInstallFailed(Exception exception)
         {
+            ErrorMessage = exception.Message;
             OnPropertyChanged("StatusMessage");
         }
 
@@ -52,6 +53,17 @@ namespace NosStat.WindowsClient.Gui.ViewModel
                 if (serviceManager.IsInstalled)
                     return "Service is installed.";
                 return "Service is not installed.";
+            }
+        }
+
+        private string errorMessage = "";
+        public string ErrorMessage
+        {
+            get { return errorMessage; }
+            set
+            {
+                errorMessage = value;
+                OnPropertyChanged();
             }
         }
 

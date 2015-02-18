@@ -35,6 +35,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Data" />
     <Reference Include="System.ServiceProcess" />
     <Reference Include="System.Xml" />
@@ -54,11 +55,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\Extensions\AssemblyExtensions.cs" />
     <Compile Include="Model\Service.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Model\ServiceManager.cs" />
     <Compile Include="ViewModel\CommandFactory.cs" />
     <Compile Include="ViewModel\ServiceViewModel.cs" />
+    <Compile Include="View\ErrorDisplay.xaml.cs">
+      <DependentUpon>ErrorDisplay.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Info.xaml.cs">
       <DependentUpon>Info.xaml</DependentUpon>
     </Compile>
@@ -68,6 +73,10 @@
     <Compile Include="View\ServiceStatus.xaml.cs">
       <DependentUpon>ServiceStatus.xaml</DependentUpon>
     </Compile>
+    <Page Include="View\ErrorDisplay.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="View\Info.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
