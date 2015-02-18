@@ -17,7 +17,7 @@ namespace NosStat.WindowsClient.Service
             ServiceBase[] ServicesToRun;
             ServicesToRun = new ServiceBase[]
             {
-                new Service1()
+                new NosgothLogMonitoringService()
             };
             ServiceBase.Run(ServicesToRun);
         }

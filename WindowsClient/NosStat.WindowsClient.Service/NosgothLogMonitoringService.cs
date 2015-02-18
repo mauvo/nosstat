@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 
 namespace NosStat.WindowsClient.Service
 {
-    public partial class Service1 : ServiceBase
+    public partial class NosgothLogMonitoringService : ServiceBase
     {
-        public Service1()
+        public NosgothLogMonitoringService()
         {
             InitializeComponent();
         }
