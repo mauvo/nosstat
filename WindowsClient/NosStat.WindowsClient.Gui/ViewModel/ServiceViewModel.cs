@@ -2,6 +2,7 @@ using System;
 using System.ComponentModel;
 using System.Net;
 using System.Runtime.CompilerServices;
+using System.Text;
 using System.Windows.Input;
 using NosStat.WindowsClient.Gui.Annotations;
 using NosStat.WindowsClient.Gui.Model;
@@ -37,7 +38,20 @@ namespace NosStat.WindowsClient.Gui.ViewModel
 
         private void OnServiceInstallFailed(Exception exception)
         {
-            ErrorMessage = exception.Message;
+            if (exception is AggregateException)
+            {
+                var aggException = (AggregateException) exception;
+                var stringBuilder = new StringBuilder();
+                foreach (var innerException in aggException.InnerExceptions)
+                {
+                    stringBuilder.AppendLine(innerException.Message);
+                }
+                ErrorMessage = stringBuilder.ToString();
+            }
+            else
+            {
+                ErrorMessage = exception.Message;
+            }
             OnPropertyChanged("StatusMessage");
         }
 
