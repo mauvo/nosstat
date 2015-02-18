@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NosStat.WindowsClient.Gui",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NosStat.WindowsClient.Service", "NosStat.WindowsClient.Service\NosStat.WindowsClient.Service.csproj", "{F5259291-A8DF-4DEA-808A-EE337C388926}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NosStat.WindowsClient.Tests", "NosStat.WindowsClient.Tests\NosStat.WindowsClient.Tests.csproj", "{BEDC53FB-FEE7-49B3-986F-F842A963CF7D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{F5259291-A8DF-4DEA-808A-EE337C388926}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F5259291-A8DF-4DEA-808A-EE337C388926}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F5259291-A8DF-4DEA-808A-EE337C388926}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BEDC53FB-FEE7-49B3-986F-F842A963CF7D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BEDC53FB-FEE7-49B3-986F-F842A963CF7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BEDC53FB-FEE7-49B3-986F-F842A963CF7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BEDC53FB-FEE7-49B3-986F-F842A963CF7D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
