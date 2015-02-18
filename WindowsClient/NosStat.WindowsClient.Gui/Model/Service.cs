@@ -10,7 +10,7 @@ namespace NosStat.WindowsClient.Gui.Model
 {
     internal class Service
     {
-        private const string NosStateServiceName = "NosStatService";
+        private const string NosStateServiceName = "NosgothLogMonitoringService";
         private const string NosStatExeName = "NosStat.WindowsClient.Service.exe";
 
         private ServiceController serviceController;
