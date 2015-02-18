@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 namespace NosStat.WindowsClient.Service
 {
     [RunInstaller(true)]
-    public partial class Installer : System.Configuration.Install.Installer
+    public partial class ProjectInstaller : System.Configuration.Install.Installer
     {
-        public Installer()
+        public ProjectInstaller()
         {
             InitializeComponent();
         }
