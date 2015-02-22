@@ -13,6 +13,5 @@ namespace NosStat.WindowsClient.ServiceInterfaces
     {
         [OperationContract]
         bool RegisterForLogEvents(Action<string> logCallback);
-
     }
 }

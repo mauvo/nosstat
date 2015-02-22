@@ -36,6 +36,7 @@
     <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Core" />
     <Reference Include="System.Management" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -44,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GuiCommunicationService.cs" />
     <Compile Include="NosgothLogMonitoringService.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -70,6 +72,12 @@
     <EmbeddedResource Include="ProjectInstaller.resx">
       <DependentUpon>ProjectInstaller.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\NosStat.WindowsClient.ServiceInterfaces\NosStat.WindowsClient.ServiceInterfaces.csproj">
+      <Project>{33ae29bd-b688-433b-8e5e-83498ae6b412}</Project>
+      <Name>NosStat.WindowsClient.ServiceInterfaces</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
