@@ -20,6 +20,22 @@ namespace NosStat.WindowsClient.Gui.ViewModel
             serviceManager = new ServiceManager();
         }
 
+        private ICommand m_UninstallService;
+        public ICommand UninstallService
+        {
+            get
+            {
+                if (m_UninstallService == null)
+                    m_UninstallService = CommandFactory.CreateCommand(ExecuteUninstallService);
+                return m_UninstallService;
+            }
+        }
+
+        private void ExecuteUninstallService()
+        {
+            serviceManager.UninstallService(OnServiceOperationComplete, OnServiceOperationError);
+        }
+
         private ICommand m_InstallService;
         public ICommand InstallService
         {
@@ -33,10 +49,10 @@ namespace NosStat.WindowsClient.Gui.ViewModel
 
         private void ExecuteInstallService()
         {
-            serviceManager.InstallService(OnServiceInstallComplete, OnServiceInstallFailed);
+            serviceManager.InstallService(OnServiceOperationComplete, OnServiceOperationError);
         }
 
-        private void OnServiceInstallFailed(Exception exception)
+        private void OnServiceOperationError(Exception exception)
         {
             if (exception is AggregateException)
             {
@@ -55,7 +71,7 @@ namespace NosStat.WindowsClient.Gui.ViewModel
             OnPropertyChanged("StatusMessage");
         }
 
-        private void OnServiceInstallComplete()
+        private void OnServiceOperationComplete()
         {
             OnPropertyChanged("StatusMessage");
         }

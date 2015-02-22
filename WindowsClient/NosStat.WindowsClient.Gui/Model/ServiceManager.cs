@@ -18,7 +18,13 @@ namespace NosStat.WindowsClient.Gui.Model
         public void InstallService(Action onServiceInstallCompleteCallback, Action<Exception> onServiceInstallFailedCallback)
         {
             Task doingServiceInstall = DoServiceInstall();
-            doingServiceInstall.ContinueWith((t) => OnServiceInstallCompleteCallback(t, onServiceInstallCompleteCallback, onServiceInstallFailedCallback));
+            doingServiceInstall.ContinueWith((t) => OnServiceOperationCompleteCallback(t, onServiceInstallCompleteCallback, onServiceInstallFailedCallback));
+        }
+
+        public void UninstallService(Action onServiceOperationComplete, Action<Exception> onServiceOperationError)
+        {
+            Task doingServiceUninstall = DoServiceUninstall();
+            doingServiceUninstall.ContinueWith((t) => OnServiceOperationCompleteCallback(t, onServiceOperationComplete, onServiceOperationError));
         }
 
         private Task DoServiceInstall()
@@ -29,7 +35,15 @@ namespace NosStat.WindowsClient.Gui.Model
             });
         }
 
-        private void OnServiceInstallCompleteCallback(Task task, Action onServiceInstallCompleteCallback, Action<Exception> onServiceInstallFailedCallback)
+        private Task DoServiceUninstall()
+        {
+            return Task.Factory.StartNew(() =>
+            {
+                service.Uninstall();
+            });
+        }
+
+        private void OnServiceOperationCompleteCallback(Task task, Action onServiceInstallCompleteCallback, Action<Exception> onServiceInstallFailedCallback)
         {
             try
             {
