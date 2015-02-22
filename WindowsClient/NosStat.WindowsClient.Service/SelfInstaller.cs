@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 using System.Configuration.Install;
 
-namespace gotnet.biz.Utilities.WindowsServices
+namespace NosStat.WindowsClient.Service
 {
     /// <summary>
     /// http://www.codeproject.com/Articles/21405/Windows-Services-Can-Install-Themselves
