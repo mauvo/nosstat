@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CallbackAggregator.cs" />
     <Compile Include="GuiCommunicationService.cs" />
     <Compile Include="NosgothLogMonitoringService.cs" />
     <Compile Include="Program.cs" />

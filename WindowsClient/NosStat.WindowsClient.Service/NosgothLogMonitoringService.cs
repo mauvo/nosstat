@@ -15,10 +15,11 @@ namespace NosStat.WindowsClient.Service
     public partial class NosgothLogMonitoringService : ServiceBase
     {
         private ServiceHost wcfServiceHost;
+        private INosStatServiceCallbacks guiCallbacks;
 
         public NosgothLogMonitoringService()
         {
-            this.ServiceName = "NosgothLogMonitoringService";
+            ServiceName = "NosgothLogMonitoringService";
         }
 
         protected override void OnStart(string[] args)
@@ -26,6 +27,7 @@ namespace NosStat.WindowsClient.Service
             wcfServiceHost = new ServiceHost(typeof (GuiCommunicationService),new Uri[] {new Uri("net.pipe://localhost")});
             wcfServiceHost.AddServiceEndpoint(typeof(INosStatService), new NetNamedPipeBinding(), "NosStatService");
             wcfServiceHost.Open();
+            guiCallbacks = new CallbackAggregator(GuiCommunicationService.AllCallbacks);
         }
 
         protected override void OnStop()

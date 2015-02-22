@@ -11,9 +11,24 @@ namespace NosStat.WindowsClient.Service
     [ServiceBehavior(ConcurrencyMode = ConcurrencyMode.Reentrant)]
     class GuiCommunicationService : INosStatService
     {
+        private static List<INosStatServiceCallbacks> allCallbacks;
+        public static IEnumerable<INosStatServiceCallbacks> AllCallbacks;
+
+        private INosStatServiceCallbacks callback;
+
+        public GuiCommunicationService()
+        {
+            callback = OperationContext.Current.GetCallbackChannel<INosStatServiceCallbacks>();
+            allCallbacks.Add(callback);
+        }
+
+        ~GuiCommunicationService()
+        {
+            allCallbacks.Remove(callback);
+        }
+
         public string RegisterForLogEvents(string message)
         {
-            var callback = OperationContext.Current.GetCallbackChannel<INosStatServiceCallbacks>();
             Task.Factory.StartNew(() => callback.LogMessage("Test log message"));
             return message;
         }
