@@ -74,6 +74,7 @@ namespace NosStat.WindowsClient.Gui.Model
             process.Start();
             process.WaitForExit(); // sleep calling process thread until evoked process exit
 
+            RefreshServiceController();
         }
 
 
