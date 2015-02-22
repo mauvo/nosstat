@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Configuration.Install;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -36,10 +37,45 @@ namespace NosStat.WindowsClient.Gui.Model
         {
             if(IsInstalled)
                 throw new Exception("Cannot install NosStat Service, it is already installed.");
-            ManagedInstallerClass.InstallHelper(new string[] {NosStatServiceExePath});
+
+            var info = new ProcessStartInfo(NosStatServiceExePath, "/install")
+            {
+                Verb = "runas", // indicates to elevate privileges
+            };
+
+            var process = new Process
+            {
+                EnableRaisingEvents = true, // enable WaitForExit()
+                StartInfo = info
+            };
+
+            process.Start();
+            process.WaitForExit(); // sleep calling process thread until evoked process exit
+
             RefreshServiceController();
         }
 
-        
+        public void Uninstall()
+        {
+            if (!IsInstalled)
+                throw new Exception("Cannot uninstall NosStat Service, it is not installed.");
+
+            var info = new ProcessStartInfo(NosStatServiceExePath, "/uninstall")
+            {
+                Verb = "runas", // indicates to elevate privileges
+            };
+
+            var process = new Process
+            {
+                EnableRaisingEvents = true, // enable WaitForExit()
+                StartInfo = info
+            };
+
+            process.Start();
+            process.WaitForExit(); // sleep calling process thread until evoked process exit
+
+        }
+
+
     }
 }
