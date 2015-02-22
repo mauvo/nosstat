@@ -38,7 +38,7 @@ namespace NosStat.WindowsClient.Gui.Model
             if(IsInstalled)
                 throw new Exception("Cannot install NosStat Service, it is already installed.");
 
-            var info = new ProcessStartInfo(NosStatServiceExePath, "/install")
+            var info = new ProcessStartInfo(NosStatServiceExePath, "/install \"" + GetLogFolderPath() + "\"")
             {
                 Verb = "runas", // indicates to elevate privileges
             };
@@ -54,6 +54,12 @@ namespace NosStat.WindowsClient.Gui.Model
 
             RefreshServiceController();
         }
+
+        private string GetLogFolderPath()
+        {
+            return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), @"my games\Nosgoth\BCMPGame\Logs");
+        }
+
 
         public void Uninstall()
         {

@@ -16,13 +16,15 @@ namespace NosStat.WindowsClient.Service
 {
     public partial class NosgothLogMonitoringService : ServiceBase
     {
+        private readonly string m_LogsFolder;
         private ServiceHost wcfServiceHost;
         private INosStatServiceCallbacks guiCallbacks;
         private SpeechSynthesizer synthesizer;
         private FileSystemWatcher watch;
 
-        public NosgothLogMonitoringService()
+        public NosgothLogMonitoringService(string logsFolder)
         {
+            m_LogsFolder = logsFolder;
             ServiceName = "NosgothLogMonitoringService";
         }
 
@@ -36,15 +38,45 @@ namespace NosStat.WindowsClient.Service
             synthesizer = new SpeechSynthesizer();
             synthesizer.Volume = 100;  // 0...100
             synthesizer.Rate = -2;     // -10...10
-            Speak("Test speech");
+
+            Speak("Running");
+            Speak(m_LogsFolder);
 
             watch = new FileSystemWatcher();
-            watch.Path = @"C:\Users\david_000\Documents\my games\Nosgoth\BCMPGame\Logs";
+            watch.Path = GetLogFolderPath(); 
             watch.Filter = "Launch.log";
             watch.NotifyFilter = NotifyFilters.LastAccess | NotifyFilters.LastWrite; //more options
             watch.Changed += new FileSystemEventHandler(OnChanged);
             watch.EnableRaisingEvents = true;
         }
+
+        private string GetLogFolderPath()
+        {
+            return @"C:\Users\david_000\Documents\my games\Nosgoth\BCMPGame\Logs";
+
+            return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), @"my games\Nosgoth\BCMPGame\Logs");
+        }
+
+
+        //        for line in open(log_file):
+        //if ' Beacon: PlayerName: ' in line:
+        //current_player = line.split(' PlayerName: ')[1].split('\r\n')[0]
+        //        players[current_player]['name'] = current_player
+        //        elif ' Beacon: XpLevel: ' in line:
+        //level = line.split(' XpLevel: ')[1].split('\r\n')[0]
+        //        players[current_player]['level'] = level
+        //        elif ' Beacon: MMR: ' in line:
+        //mmr = line.split(' MMR: ')[1].split('\r\n')[0]
+        //        players[current_player]['mmr'] = mmr
+        //        elif ' Lobby: Team' in line:
+        //current_team = line.split(' Lobby: ')[1].split(' ')[0]
+        //        teams[current_team] = []
+        //        elif ' Lobby: Idx:' in line:
+        //name = line.split('.PlayerName:\'')[1].split("'")[0]
+        //        teams[current_team].append(players[name])
+        //elif ' Log: --- LOADING MOVIE START ---' in line:
+        //print_teams(teams)
+        //say_teams(speech, teams)
 
         private void Speak(string message)
         {
