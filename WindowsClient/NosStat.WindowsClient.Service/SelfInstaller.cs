@@ -1,5 +1,8 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Reflection;
 using System.Configuration.Install;
+using System.Linq;
+using System.ServiceProcess;
 
 namespace NosStat.WindowsClient.Service
 {
@@ -9,11 +12,14 @@ namespace NosStat.WindowsClient.Service
     public static class SelfInstaller
     {
         private static readonly string _exePath = Assembly.GetExecutingAssembly().Location;
-        public static bool InstallMe()
+        public static bool InstallMe(string serviceName)
         {
             try
             {
                 ManagedInstallerClass.InstallHelper(new string[] { _exePath });
+                var serviceController = ServiceController.GetServices().FirstOrDefault(s => s.ServiceName == serviceName);
+                serviceController.Start();
+                serviceController.WaitForStatus(ServiceControllerStatus.Running, TimeSpan.FromSeconds(5));
             }
             catch
             {

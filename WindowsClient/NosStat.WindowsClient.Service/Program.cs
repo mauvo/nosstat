@@ -23,7 +23,7 @@ namespace NosStat.WindowsClient.Service
                         break;
                     case "install":
                     case "i":
-                        SelfInstaller.InstallMe();
+                        SelfInstaller.InstallMe("NosgothLogMonitoringService");
                         break;
                     case "uninstall":
                     case "u":
