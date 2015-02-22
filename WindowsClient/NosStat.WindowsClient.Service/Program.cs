@@ -33,12 +33,7 @@ namespace NosStat.WindowsClient.Service
             }
             else
             {
-                ServiceBase[] ServicesToRun;
-                ServicesToRun = new ServiceBase[]
-                {
-                new NosgothLogMonitoringService()
-                };
-                ServiceBase.Run(ServicesToRun);
+                ServiceBase.Run(new NosgothLogMonitoringService());
             }
         }
     }
