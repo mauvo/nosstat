@@ -18,7 +18,12 @@ namespace NosStat.WindowsClient.Gui.ViewModel
 
         public ServiceViewModel()
         {
-            serviceManager = new ServiceManager();
+            serviceManager = new ServiceManager(LogMessage);
+        }
+
+        private void LogMessage(string message)
+        {
+            m_LogMessages.Add(message);
         }
 
         private ObservableCollection<string>  m_LogMessages = new ObservableCollection<string>();

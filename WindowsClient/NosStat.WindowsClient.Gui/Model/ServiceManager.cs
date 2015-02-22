@@ -8,12 +8,14 @@ namespace NosStat.WindowsClient.Gui.Model
 {
     public class ServiceManager : INosStatServiceCallbacks
     {
+        private readonly Action<string> m_LogMessage;
         public bool IsInstalled { get { return service.IsInstalled; } }
 
         private Service service;
 
-        public ServiceManager()
+        public ServiceManager(Action<string> LogMessage)
         {
+            m_LogMessage = LogMessage;
             service = new Service();
         }
 
@@ -68,8 +70,7 @@ namespace NosStat.WindowsClient.Gui.Model
 
         public void LogMessage(string message)
         {
-            var length = message.Length;
-            var i = length;
+            m_LogMessage(message);
         }
     }
 }
