@@ -20,6 +20,22 @@ namespace NosStat.WindowsClient.Gui.ViewModel
             serviceManager = new ServiceManager();
         }
 
+        private ICommand m_ConnectToService;
+        public ICommand ConnectToService
+        {
+            get
+            {
+                if (m_ConnectToService == null)
+                    m_ConnectToService = CommandFactory.CreateCommand(ExecuteConnectToService);
+                return m_ConnectToService;
+            }
+        }
+
+        private void ExecuteConnectToService()
+        {
+            serviceManager.ExecuteConnectToService();
+        }
+
         private ICommand m_UninstallService;
         public ICommand UninstallService
         {

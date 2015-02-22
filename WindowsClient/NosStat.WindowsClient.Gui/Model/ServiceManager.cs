@@ -1,10 +1,12 @@
 using System;
+using System.ServiceModel;
 using System.ServiceProcess;
 using System.Threading.Tasks;
+using NosStat.WindowsClient.ServiceInterfaces;
 
 namespace NosStat.WindowsClient.Gui.Model
 {
-    public class ServiceManager
+    public class ServiceManager : INosStatServiceCallbacks
     {
         public bool IsInstalled { get { return service.IsInstalled; } }
 
@@ -54,6 +56,20 @@ namespace NosStat.WindowsClient.Gui.Model
             {
                 Task.Factory.StartNew(() => onServiceInstallFailedCallback(e));
             }
+        }
+
+        public void ExecuteConnectToService()
+        {
+            InstanceContext context = new InstanceContext(this);
+            ChannelFactory<INosStatService> pipeFactory = new DuplexChannelFactory<INosStatService>(context, new NetNamedPipeBinding(), new EndpointAddress("net.pipe://localhost/NosStatService"));
+            INosStatService nosStatService = pipeFactory.CreateChannel();
+            var result = nosStatService.RegisterForLogEvents("Test");
+        }
+
+        public void LogMessage(string message)
+        {
+            var length = message.Length;
+            var i = length;
         }
     }
 }

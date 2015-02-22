@@ -37,6 +37,7 @@
     <Reference Include="System" />
     <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Data" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.ServiceProcess" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -131,6 +132,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="View\DesignData\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\NosStat.WindowsClient.ServiceInterfaces\NosStat.WindowsClient.ServiceInterfaces.csproj">
+      <Project>{33ae29bd-b688-433b-8e5e-83498ae6b412}</Project>
+      <Name>NosStat.WindowsClient.ServiceInterfaces</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
