@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.ServiceModel;
 using System.ServiceProcess;
@@ -18,6 +19,7 @@ namespace NosStat.WindowsClient.Service
         private ServiceHost wcfServiceHost;
         private INosStatServiceCallbacks guiCallbacks;
         private SpeechSynthesizer synthesizer;
+        private FileSystemWatcher watch;
 
         public NosgothLogMonitoringService()
         {
@@ -34,7 +36,24 @@ namespace NosStat.WindowsClient.Service
             synthesizer = new SpeechSynthesizer();
             synthesizer.Volume = 100;  // 0...100
             synthesizer.Rate = -2;     // -10...10
-            synthesizer.SpeakAsync("Test speech");
+            Speak("Test speech");
+
+            watch = new FileSystemWatcher();
+            watch.Path = @"C:\Users\david_000\Documents\my games\Nosgoth\BCMPGame\Logs";
+            watch.Filter = "Launch.log";
+            watch.NotifyFilter = NotifyFilters.LastAccess | NotifyFilters.LastWrite; //more options
+            watch.Changed += new FileSystemEventHandler(OnChanged);
+            watch.EnableRaisingEvents = true;
+        }
+
+        private void Speak(string message)
+        {
+            synthesizer.SpeakAsync(message);
+        }
+
+        private void OnChanged(object sender, FileSystemEventArgs e)
+        {
+            Speak("Log changed");
         }
 
         protected override void OnStop()
