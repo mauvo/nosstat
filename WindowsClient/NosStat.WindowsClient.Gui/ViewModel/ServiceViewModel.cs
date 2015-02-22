@@ -1,4 +1,5 @@
 using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Net;
 using System.Runtime.CompilerServices;
@@ -19,6 +20,9 @@ namespace NosStat.WindowsClient.Gui.ViewModel
         {
             serviceManager = new ServiceManager();
         }
+
+        private ObservableCollection<string>  m_LogMessages = new ObservableCollection<string>();
+        public ObservableCollection<string> LogMessages { get { return m_LogMessages; } }
 
         private ICommand m_ConnectToService;
         public ICommand ConnectToService
@@ -49,6 +53,7 @@ namespace NosStat.WindowsClient.Gui.ViewModel
 
         private void ExecuteUninstallService()
         {
+            m_LogMessages.Add("Uninstall");
             serviceManager.UninstallService(OnServiceOperationComplete, OnServiceOperationError);
         }
 
@@ -65,6 +70,7 @@ namespace NosStat.WindowsClient.Gui.ViewModel
 
         private void ExecuteInstallService()
         {
+            m_LogMessages.Add("Install");
             serviceManager.InstallService(OnServiceOperationComplete, OnServiceOperationError);
         }
 

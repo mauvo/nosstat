@@ -15,5 +15,6 @@
         <view:ServiceControls DataContext="{Binding .}"/>
         <view:Info/>
         <view:ErrorDisplay DataContext="{Binding .}"/>
+        <view:LiveLog DataContext="{Binding .}"/>
     </StackPanel>
 </Window>
