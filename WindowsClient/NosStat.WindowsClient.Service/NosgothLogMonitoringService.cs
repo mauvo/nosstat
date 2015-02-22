@@ -18,7 +18,7 @@ namespace NosStat.WindowsClient.Service
 
         public NosgothLogMonitoringService()
         {
-            InitializeComponent();
+            this.ServiceName = "NosgothLogMonitoringService";
         }
 
         protected override void OnStart(string[] args)
@@ -31,6 +31,15 @@ namespace NosStat.WindowsClient.Service
         protected override void OnStop()
         {
             wcfServiceHost.Close();
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
         }
     }
 }

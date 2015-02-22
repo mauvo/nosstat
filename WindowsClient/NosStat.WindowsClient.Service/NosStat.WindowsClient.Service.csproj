@@ -46,12 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GuiCommunicationService.cs" />
-    <Compile Include="NosgothLogMonitoringService.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="NosgothLogMonitoringService.Designer.cs">
-      <DependentUpon>NosgothLogMonitoringService.cs</DependentUpon>
-    </Compile>
+    <Compile Include="NosgothLogMonitoringService.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="ProjectInstaller.cs">
       <SubType>Component</SubType>
@@ -66,9 +61,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="NosgothLogMonitoringService.resx">
-      <DependentUpon>NosgothLogMonitoringService.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="ProjectInstaller.resx">
       <DependentUpon>ProjectInstaller.cs</DependentUpon>
     </EmbeddedResource>
