@@ -40,43 +40,14 @@ namespace NosStat.WindowsClient.Service
             synthesizer.Rate = -2;     // -10...10
 
             Speak("Running");
-            Speak(m_LogsFolder);
-
+            
             watch = new FileSystemWatcher();
-            watch.Path = GetLogFolderPath(); 
+            watch.Path = m_LogsFolder; 
             watch.Filter = "Launch.log";
             watch.NotifyFilter = NotifyFilters.LastAccess | NotifyFilters.LastWrite; //more options
             watch.Changed += new FileSystemEventHandler(OnChanged);
             watch.EnableRaisingEvents = true;
         }
-
-        private string GetLogFolderPath()
-        {
-            return @"C:\Users\david_000\Documents\my games\Nosgoth\BCMPGame\Logs";
-
-            return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), @"my games\Nosgoth\BCMPGame\Logs");
-        }
-
-
-        //        for line in open(log_file):
-        //if ' Beacon: PlayerName: ' in line:
-        //current_player = line.split(' PlayerName: ')[1].split('\r\n')[0]
-        //        players[current_player]['name'] = current_player
-        //        elif ' Beacon: XpLevel: ' in line:
-        //level = line.split(' XpLevel: ')[1].split('\r\n')[0]
-        //        players[current_player]['level'] = level
-        //        elif ' Beacon: MMR: ' in line:
-        //mmr = line.split(' MMR: ')[1].split('\r\n')[0]
-        //        players[current_player]['mmr'] = mmr
-        //        elif ' Lobby: Team' in line:
-        //current_team = line.split(' Lobby: ')[1].split(' ')[0]
-        //        teams[current_team] = []
-        //        elif ' Lobby: Idx:' in line:
-        //name = line.split('.PlayerName:\'')[1].split("'")[0]
-        //        teams[current_team].append(players[name])
-        //elif ' Log: --- LOADING MOVIE START ---' in line:
-        //print_teams(teams)
-        //say_teams(speech, teams)
 
         private void Speak(string message)
         {
@@ -85,7 +56,29 @@ namespace NosStat.WindowsClient.Service
 
         private void OnChanged(object sender, FileSystemEventArgs e)
         {
-            Speak("Log changed");
+            var lines = File.ReadAllLines(e.FullPath);
+            foreach (var line in lines)
+            {
+                //        for line in open(log_file):
+                //if ' Beacon: PlayerName: ' in line:
+                //current_player = line.split(' PlayerName: ')[1].split('\r\n')[0]
+                //        players[current_player]['name'] = current_player
+                //        elif ' Beacon: XpLevel: ' in line:
+                //level = line.split(' XpLevel: ')[1].split('\r\n')[0]
+                //        players[current_player]['level'] = level
+                //        elif ' Beacon: MMR: ' in line:
+                //mmr = line.split(' MMR: ')[1].split('\r\n')[0]
+                //        players[current_player]['mmr'] = mmr
+                //        elif ' Lobby: Team' in line:
+                //current_team = line.split(' Lobby: ')[1].split(' ')[0]
+                //        teams[current_team] = []
+                //        elif ' Lobby: Idx:' in line:
+                //name = line.split('.PlayerName:\'')[1].split("'")[0]
+                //        teams[current_team].append(players[name])
+                //elif ' Log: --- LOADING MOVIE START ---' in line:
+                //print_teams(teams)
+                //say_teams(speech, teams)
+            }
         }
 
         protected override void OnStop()
