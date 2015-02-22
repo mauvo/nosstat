@@ -11,7 +11,7 @@ namespace NosStat.WindowsClient.Service
     [ServiceBehavior(ConcurrencyMode = ConcurrencyMode.Reentrant)]
     class GuiCommunicationService : INosStatService
     {
-        private static List<INosStatServiceCallbacks> allCallbacks;
+        private static List<INosStatServiceCallbacks> allCallbacks = new List<INosStatServiceCallbacks>();
         public static IEnumerable<INosStatServiceCallbacks> AllCallbacks;
 
         private INosStatServiceCallbacks callback;
