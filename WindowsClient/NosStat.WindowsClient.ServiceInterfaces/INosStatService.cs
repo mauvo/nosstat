@@ -12,6 +12,6 @@ namespace NosStat.WindowsClient.ServiceInterfaces
     public interface INosStatService
     {
         [OperationContract]
-        string RegisterForLogEvents(string message);
+        void Ping();
     }
 }

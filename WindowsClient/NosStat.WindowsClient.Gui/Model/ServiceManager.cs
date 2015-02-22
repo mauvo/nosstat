@@ -6,17 +6,35 @@ using NosStat.WindowsClient.ServiceInterfaces;
 
 namespace NosStat.WindowsClient.Gui.Model
 {
-    public class ServiceManager : INosStatServiceCallbacks
+    public class ServiceManager
     {
         private readonly Action<string> m_LogMessage;
         public bool IsInstalled { get { return service.IsInstalled; } }
 
         private Service service;
+        private WcfClient client;
 
         public ServiceManager(Action<string> LogMessage)
         {
             m_LogMessage = LogMessage;
             service = new Service();
+
+            client = new WcfClient();
+            client.OnConnectionChanged += OnServiceConnectionChanged;
+            client.OnMessageFromService += OnMessageFromService;
+        }
+
+        private void OnServiceConnectionChanged(object sender, bool isconnected)
+        {
+            if (isconnected)
+                m_LogMessage("Connected to Windows Service.");
+            else
+                m_LogMessage("Not connected to Windows Service.");
+        }
+
+        private void OnMessageFromService(object sender, string message)
+        {
+            m_LogMessage(message);
         }
 
         public void InstallService(Action onServiceInstallCompleteCallback, Action<Exception> onServiceInstallFailedCallback)
@@ -58,19 +76,6 @@ namespace NosStat.WindowsClient.Gui.Model
             {
                 Task.Factory.StartNew(() => onServiceInstallFailedCallback(e));
             }
-        }
-
-        public void ExecuteConnectToService()
-        {
-            InstanceContext context = new InstanceContext(this);
-            ChannelFactory<INosStatService> pipeFactory = new DuplexChannelFactory<INosStatService>(context, new NetNamedPipeBinding(), new EndpointAddress("net.pipe://localhost/NosStatService"));
-            INosStatService nosStatService = pipeFactory.CreateChannel();
-            var result = nosStatService.RegisterForLogEvents("Test");
-        }
-
-        public void LogMessage(string message)
-        {
-            m_LogMessage(message);
         }
     }
 }

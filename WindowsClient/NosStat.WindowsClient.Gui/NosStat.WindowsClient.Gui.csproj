@@ -58,6 +58,7 @@
     </ApplicationDefinition>
     <Compile Include="Model\Extensions\AssemblyExtensions.cs" />
     <Compile Include="Model\Service.cs" />
+    <Compile Include="Model\WcfClient.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Model\ServiceManager.cs" />
     <Compile Include="ViewModel\CommandFactory.cs" />

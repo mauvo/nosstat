@@ -27,10 +27,9 @@ namespace NosStat.WindowsClient.Service
             allCallbacks.Remove(callback);
         }
 
-        public string RegisterForLogEvents(string message)
+        public void Ping()
         {
-            Task.Factory.StartNew(() => callback.LogMessage("Test log message"));
-            return message;
+            
         }
     }
 }

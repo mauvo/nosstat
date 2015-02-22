@@ -5,6 +5,7 @@ using System.Net;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Windows.Input;
+using System.Windows.Threading;
 using NosStat.WindowsClient.Gui.Annotations;
 using NosStat.WindowsClient.Gui.Model;
 
@@ -15,35 +16,28 @@ namespace NosStat.WindowsClient.Gui.ViewModel
         public event PropertyChangedEventHandler PropertyChanged;
 
         private readonly ServiceManager serviceManager;
+        private readonly Dispatcher dispatcher;
 
         public ServiceViewModel()
         {
+            dispatcher = Dispatcher.CurrentDispatcher;
             serviceManager = new ServiceManager(LogMessage);
         }
 
         private void LogMessage(string message)
         {
-            m_LogMessages.Add(message);
+            if (dispatcher.CheckAccess())
+            {
+                m_LogMessages.Add(message);
+            }
+            else
+            {
+                dispatcher.BeginInvoke(new Action(() => LogMessage(message)));
+            }
         }
 
         private ObservableCollection<string>  m_LogMessages = new ObservableCollection<string>();
         public ObservableCollection<string> LogMessages { get { return m_LogMessages; } }
-
-        private ICommand m_ConnectToService;
-        public ICommand ConnectToService
-        {
-            get
-            {
-                if (m_ConnectToService == null)
-                    m_ConnectToService = CommandFactory.CreateCommand(ExecuteConnectToService);
-                return m_ConnectToService;
-            }
-        }
-
-        private void ExecuteConnectToService()
-        {
-            serviceManager.ExecuteConnectToService();
-        }
 
         private ICommand m_UninstallService;
         public ICommand UninstallService
